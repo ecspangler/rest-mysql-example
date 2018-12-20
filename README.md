@@ -56,7 +56,7 @@ $ mvn clean install
 
 Create the application for the rest service deployable in OpenShift.
 ```
-$ oc new-app openshift/wildfly-101-centos7~https://github.com/ecspangler/rest-mysql-openshift-example.git --name=demo-app-service
+$ oc new-app openshift/wildfly-101-centos7~https://github.com/ecspangler/rest-mysql-example.git --name=demo-app-service
 ```
 
 Create a configmap for environment variables used by the application. In a real application, the login credentials should go into a secret instead of a configmap.
