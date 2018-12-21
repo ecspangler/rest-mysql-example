@@ -14,6 +14,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.application.CustomerServiceValidation;
 import org.example.model.Customer;
+import org.example.repository.CustomerRepository;
+import org.example.repository.MySqlCustomerRepository;
 import org.example.service.model.CreateCustomerResponse;
 import org.example.service.model.GetCustomerResponse;
 import org.example.service.model.GetCustomersResponse;
@@ -23,8 +25,7 @@ public class CustomerService {
 
 	private static final Logger log = LogManager.getLogger(CustomerService.class);
 
-	// private CustomerRepository customerRepository = new
-	// MySqlCustomerRepository();
+	private CustomerRepository customerRepository = new MySqlCustomerRepository();
 	private CustomerServiceValidation customerServiceValidation = new CustomerServiceValidation();
 
 	@POST
