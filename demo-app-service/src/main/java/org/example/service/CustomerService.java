@@ -23,8 +23,7 @@ public class CustomerService {
 
 	private static final Logger log = LogManager.getLogger(CustomerService.class);
 
-	// private CustomerRepository customerRepository = new
-	// MySqlCustomerRepository();
+	private CustomerRepository customerRepository = new MySqlCustomerRepository();
 	private CustomerServiceValidation customerServiceValidation = new CustomerServiceValidation();
 
 	@POST
