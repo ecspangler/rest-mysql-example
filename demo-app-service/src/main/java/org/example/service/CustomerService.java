@@ -15,6 +15,8 @@ import org.apache.logging.log4j.Logger;
 import org.example.repository.CustomerRepository;
 import org.example.application.CustomerServiceValidation;
 import org.example.model.Customer;
+import org.example.repository.CustomerRepository;
+import org.example.repository.MySqlCustomerRepository;
 import org.example.service.model.CreateCustomerResponse;
 import org.example.service.model.GetCustomerResponse;
 import org.example.service.model.GetCustomersResponse;
