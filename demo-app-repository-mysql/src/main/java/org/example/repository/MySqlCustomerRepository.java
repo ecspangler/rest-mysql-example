@@ -15,9 +15,9 @@ public class MySqlCustomerRepository implements CustomerRepository {
 
 	private static final Logger log = LogManager.getLogger(MySqlCustomerRepository.class);
 
-	HibernateUtil hibernateUtil = new HibernateUtil();
+	private HibernateUtil hibernateUtil = new HibernateUtil();
 
-	final Session session = hibernateUtil.getHibernateSession();
+	protected Session session = hibernateUtil.getHibernateSession();
 
 	@Override
 	public void addCustomer(Customer customer) {
@@ -32,31 +32,47 @@ public class MySqlCustomerRepository implements CustomerRepository {
 
 	@Override
 	public List<Customer> getAllCustomers() {
+		log.info("Retrieving all customers");
 		Transaction transaction = session.beginTransaction();
 
 		Criteria cr = session.createCriteria(Customer.class);
 		List<Customer> results = cr.list();
 
 		transaction.commit();
-
 		return results;
 	}
 
 	@Override
 	public Customer getCustomer(BigInteger id) {
 		log.info("Retrieving customer with id: {}", id);
-		// TODO Auto-generated method stub
-		return null;
+		Transaction transaction = session.beginTransaction();
+
+		Customer customer = (Customer) session.get(Customer.class, id);
+
+		transaction.commit();
+		return customer;
 	}
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		// In a real application the full object would not be logged at info level
+		log.info("Updating customer: {}", customer);
+		Transaction transaction = session.beginTransaction();
+
+		session.update(customer);
+
+		transaction.commit();
 	}
 
 	@Override
 	public void deleteCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		// In a real application the full object would not be logged at info level
+		log.info("Deleting customer: {}", customer);
+		Transaction transaction = session.beginTransaction();
+
+		session.delete(customer);
+
+		transaction.commit();
 	}
 
 	public HibernateUtil getHibernateUtil() {
