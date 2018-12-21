@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.repository.CustomerRepository;
 import org.example.application.CustomerServiceValidation;
 import org.example.model.Customer;
 import org.example.service.model.CreateCustomerResponse;
