@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,9 +16,7 @@ public class MySqlCustomerRepository implements CustomerRepository {
 
 	private static final Logger log = LogManager.getLogger(MySqlCustomerRepository.class);
 
-	private HibernateUtil hibernateUtil = new HibernateUtil();
-
-	protected Session session = hibernateUtil.getHibernateSession();
+	protected Session session = HibernateUtil.getHibernateSession();
 
 	@Override
 	public void addCustomer(Customer customer) {
@@ -25,6 +24,8 @@ public class MySqlCustomerRepository implements CustomerRepository {
 		log.info("Saving customer: {}", customer);
 
 		Transaction transaction = session.beginTransaction();
+		customer.setCreatedTimestamp(LocalDateTime.now());
+		customer.setUpdatedTimestamp(LocalDateTime.now());
 		session.save(customer);
 
 		transaction.commit();
@@ -59,6 +60,7 @@ public class MySqlCustomerRepository implements CustomerRepository {
 		log.info("Updating customer: {}", customer);
 		Transaction transaction = session.beginTransaction();
 
+		customer.setUpdatedTimestamp(LocalDateTime.now());
 		session.update(customer);
 
 		transaction.commit();
@@ -73,14 +75,6 @@ public class MySqlCustomerRepository implements CustomerRepository {
 		session.delete(customer);
 
 		transaction.commit();
-	}
-
-	public HibernateUtil getHibernateUtil() {
-		return hibernateUtil;
-	}
-
-	public void setHibernateUtil(HibernateUtil hibernateUtil) {
-		this.hibernateUtil = hibernateUtil;
 	}
 
 	public Session getSession() {

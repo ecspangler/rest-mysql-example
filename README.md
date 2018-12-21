@@ -88,3 +88,16 @@ oc set env dc/demo-app-service --from configmap/rest-mysql-demo-config
 Wait for the application to redeploy.
 
 Expose the route for the application.
+
+
+
+"id": null,
+"firstName": "James",
+"lastName": "Smith",
+"uniqueId": "A00001",
+"accountNumber": "0000111100001111",
+"favoriteColor": "Green",
+"createdBy": test123,
+"createdTimestamp": null,
+"updatedBy": null,
+"updatedTimestamp": null
