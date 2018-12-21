@@ -1,7 +1,6 @@
 package org.example.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,10 +36,9 @@ public class CustomerService {
 		log.info("Creating customer: {}", customer);
 
 		response.setErrors(customerServiceValidation.validate(customer));
-//		if (response.getErrors().isEmpty()) {
-//			customerRepository.addCustomer(customer);
-//		}
-
+		if (response.getErrors().isEmpty()) {
+			customerRepository.addCustomer(customer);
+		}
 		return response;
 	}
 
@@ -50,22 +48,7 @@ public class CustomerService {
 		GetCustomersResponse response = new GetCustomersResponse();
 		log.info("Retrieving all Customers");
 
-		// response.setCustomers(customerRepository.getAllCustomers());
-		Customer cust1 = makeDummyCustomer();
-		Customer cust2 = makeDummyCustomer();
-		cust2.setUniqueId("A00002");
-		cust2.setLastName("Smith II");
-		Customer cust3 = makeDummyCustomer();
-		cust3.setUniqueId("A00003");
-		cust3.setLastName("Smith III");
-
-		List<Customer> dummyCustomers = new ArrayList<Customer>();
-		dummyCustomers.add(cust1);
-		dummyCustomers.add(cust2);
-		dummyCustomers.add(cust3);
-
-		response.setCustomers(dummyCustomers);
-
+		response.setCustomers(customerRepository.getAllCustomers());
 		return response;
 	}
 
@@ -76,20 +59,8 @@ public class CustomerService {
 		GetCustomerResponse response = new GetCustomerResponse();
 		log.info("Retrieving Customer with id: {}", id);
 
-		response.setCustomer(makeDummyCustomer());
-
+		response.setCustomer(customerRepository.getCustomer(new BigInteger(id)));
 		return response;
 	}
 
-	private Customer makeDummyCustomer() {
-		Customer dummyCustomer = new Customer();
-
-		dummyCustomer.setUniqueId("A00001");
-		dummyCustomer.setFirstName("James");
-		dummyCustomer.setLastName("Smith");
-		dummyCustomer.setAccountNumber("0000111100001111");
-		dummyCustomer.setFavoriteColor("Green");
-
-		return dummyCustomer;
-	}
 }

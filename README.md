@@ -63,7 +63,7 @@ Create a configmap for environment variables used by the application. In a real 
 ```
 $ oc project mysql-demo
 $ database_url=`oc get service mysql -o=jsonpath='{.spec.clusterIP}{"\n"}'`
-$ database_url="${database_url}:3306"
+$ database_url="jdbc:mysql://${database_url}:3306/sampledb"
 $ oc project rest-mysql-demo
 $ oc create configmap rest-mysql-demo-config \
             --from-literal=DATABASE_URL="${database_url}" \
@@ -88,3 +88,16 @@ oc set env dc/demo-app-service --from configmap/rest-mysql-demo-config
 Wait for the application to redeploy.
 
 Expose the route for the application.
+
+
+
+"id": null,
+"firstName": "James",
+"lastName": "Smith",
+"uniqueId": "A00001",
+"accountNumber": "0000111100001111",
+"favoriteColor": "Green",
+"createdBy": test123,
+"createdTimestamp": null,
+"updatedBy": null,
+"updatedTimestamp": null
